@@ -8,7 +8,9 @@ def permutation_sort(arr):
         is_sorted = True
 
         for i in range(1,len(ls)):
-            if ls[i-1] > ls[i]: sorted = False
+            if ls[i-1] > ls[i]: 
+                is_sorted = False
+                break
         if is_sorted: return ls
     return None
         
@@ -82,9 +84,47 @@ def merge(left, right):
     if i == len(left):
         while j < len(right):
             result.append(right[j])
+            j += 1
     else:
         while i < len(left):
             result.append(left[i])
+            i += 1
     
     return result
 
+if __name__ == "__main__":
+
+
+    with open("./#2_Assignment/unsorted_list.txt", "r") as f:
+        data = f.read()
+    unsorted_list = list(map(int, data.split(",")))
+    
+    test_list = unsorted_list.copy()
+    start = time.time()
+    sorted_arr = permutation_sort(test_list)
+    end = time.time()
+    print("Execution Time for Permutation Sort:", end - start, "seconds")
+
+
+    start = time.time()
+    sorted_arr = selection_sort(unsorted_list)
+    end = time.time()
+    print("Execution Time for Selection Sort:", end - start, "seconds")
+
+
+    start = time.time()
+    sorted_arr = insertion_sort(unsorted_list)
+    end = time.time()
+    print("Execution Time for Insertion Sort:", end - start, "seconds")
+
+
+    start = time.time()
+    sorted_arr = quick_sort(unsorted_list)
+    end = time.time()
+    print("Execution Time for Quick Sort:", end - start, "seconds")
+
+
+    start = time.time()
+    sorted_arr = merge_sort(unsorted_list)
+    end = time.time()
+    print("Execution Time for Merge Sort:", end - start, "seconds")
