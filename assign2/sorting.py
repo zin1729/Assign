@@ -2,9 +2,13 @@ import time
 import sys
 from itertools import permutations
 
-def permutation_sort(arr):
+def permutation_sort(arr, time_limit = 10):
     new_arr = permutations(arr)
+    start_time = time.time()
     for ls in new_arr:
+        if time.time() - start_time > time_limit:
+            print(f"Permutation sorting: More than {time_limit} secs.")
+            return None
         is_sorted = True
 
         for i in range(1,len(ls)):
@@ -58,7 +62,7 @@ def quick_sort(arr):
     left = [x for x in arr if x < pivot]
     middle = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
-    return quick_sort(left) + quick_sort(right)
+    return quick_sort(left) + middle + quick_sort(right)
 
 def merge_sort(arr):
     if len(arr) <= 1: return arr
@@ -95,7 +99,7 @@ def merge(left, right):
 if __name__ == "__main__":
 
 
-    with open("./#2_Assignment/unsorted_list.txt", "r") as f:
+    with open("./assign2/#2_Assignment/unsorted_list.txt", "r") as f:
         data = f.read()
     unsorted_list = list(map(int, data.split(",")))
     
